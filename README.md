@@ -16,8 +16,7 @@ sudo npm install npm@latest -g
 
 ## Feature-Status
 
-- [ ] Documentation
-    - [ ] Readme with Infrastructure explained
+- [ ] Documentation with infrastructure explained
 - [x] Installable via Github repo
 - [x] Setup testing infrastructure
 - [ ] `addShoppingItem`: Handle Intent for adding a Shopping Item

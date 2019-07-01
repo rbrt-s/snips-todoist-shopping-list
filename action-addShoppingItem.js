@@ -8,6 +8,6 @@ withHermes(hermes => {
     dialog.flow(Intents.addShoppingItem, (msg, flow) => {
         const item = msg.slots.find(slot => slot.slotName == 'item').rawValue;
         flow.end();
-        return `Ich habe ${item} der Einkaufsliste hinzugefügt.`
+        return `<speak>Ich habe <emphasis level=\"moderate\">${item}</emphasis> der Einkaufsliste hinzugefügt.</speak>`;
     });
 });
