@@ -22,7 +22,9 @@
   "homepage": "https://github.com/bontscho/jarvis-shopping-list#readme",
   "dependencies": {
     "hermes-javascript": "^0.3.12",
-    "ini": "^1.3.5"
+    "ini": "^1.3.5",
+    "node-fetch": "^2.6.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.15",
