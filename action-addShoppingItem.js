@@ -2,7 +2,7 @@
 const { withHermes } = require('hermes-javascript')
 const Intents = require('./lib/intents');
 const Todoist = require('./lib/todoist');
-
+const uuidv4 = require('uuid/v4');
 
 withHermes(async hermes => {
     const todoist = await Todoist.factory();
