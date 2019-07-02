@@ -20,8 +20,8 @@ sudo npm install npm@latest -g
 - [x] Installable via Github repo
 - [x] Setup testing infrastructure
 - [ ] `addShoppingItem`: Handle Intent for adding a Shopping Item
-    - [ ] Naivly add Item to Todoist List
-    - [ ] Respectfully refuse to add `unknownword` to list
+    - [x] Naivly add Item to Todoist List
+    - [ ] Respectfully refuse to add `unknownword` to list or low confidence
     - [ ] Politely decline if Item is already on list (`existsShoppingItem`-logic)
         - [ ] Refuse adding
         - [ ] Give option to add nonetheless
@@ -37,5 +37,8 @@ sudo npm install npm@latest -g
     - [ ] Sync-Job starting from the date of installation
     - [ ] Inject all Items into the Vocabulary that were not written by the skill
     - [ ] Save all added Words for injection after installation
+- [ ] Code cleanup and debug removal
+- [ ] Give more character through varied answers
+- [ ] Tests, tests, tests!
 - [ ] Handle being offline
     - [ ] Save up items to gracefully sync later
