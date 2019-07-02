@@ -3,11 +3,12 @@ const { withHermes } = require('hermes-javascript')
 const Intents = require('./lib/intents');
 const Todoist = require('./lib/todoist');
 
-withHermes(hermes => {
+
+withHermes(async hermes => {
     const todoist = await Todoist.factory();
     const dialog = hermes.dialog()
 
-    dialog.flow(Intents.addShoppingItem, (msg, flow) => {
+    dialog.flow(Intents.addShoppingItem, async (msg, flow) => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
         const content = item.rawValue;
         const confidence = item.confidenceScore;
