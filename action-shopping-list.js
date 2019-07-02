@@ -39,10 +39,10 @@ withHermes(async hermes => {
         if (!todoist.lastItemId) {
             flow.end();
             return `<speak>
-                <s>Mein Kurzzeitgedächtnis is nicht das beste.</s>
+                <s>Ich weiß leider nicht was ich löschen soll. Mein Kurzzeitgedächtnis is nicht das beste.</s>
             </speak>`;
         } else  {
-            const tempId = uuidv4();
+            const content = todoist.lastItemContent;
             const commands = [{
                 type: Todoist.Commands.item_add,
                 uuid:  uuidv4(),
