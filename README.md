@@ -25,7 +25,7 @@ sudo npm install npm@latest -g
     - [ ] Politely decline if Item is already on list (`existsShoppingItem`-logic)
         - [ ] Refuse adding
         - [ ] Give option to add nonetheless
-- [ ] `removeLastShoppingItem`: Handle Intent to remove the previously added Shopping Item
+- [x] `removeLastShoppingItem`: Handle Intent to remove the previously added Shopping Item
 - [ ] `existsShoppingItem`: Handle Intent to checking for existing Shopping Item
     - [ ] Check for exact match
     - [ ] Use stemming to handle fuzzyness

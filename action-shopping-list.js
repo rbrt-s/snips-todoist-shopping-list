@@ -44,7 +44,7 @@ withHermes(async hermes => {
         } else  {
             const content = todoist.lastItemContent;
             const commands = [{
-                type: Todoist.Commands.item_add,
+                type: Todoist.Commands.item_delete,
                 uuid:  uuidv4(),
                 args: {
                     id: todoist.lastItemId
