@@ -45,9 +45,9 @@ withHermes(async hermes => {
 
         let text;
         if (items.includes(content)) {
-            text = `Ja, ${content} sind auf der Liste.`;
+            text = `Ja, ${content} hab ich auf deiner Liste.`;
         } else {
-            text = `Nein, ${content} sind nicht auf der Liste.`
+            text = `Nein, ${content} hab ich nicht auf deiner Liste.`
         }
 
         return `<speak>
