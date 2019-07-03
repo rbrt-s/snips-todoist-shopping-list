@@ -44,7 +44,9 @@ withHermes(async hermes => {
         flow.end();
 
         let text;
-        if (items.includes(content)) {
+        if (items.length === 0) {
+            text = `Deine Liste ist leer, was denkst du?`;
+        } else if (items.includes(content)) {
             text = `Ja, ${content} hab ich auf deiner Liste.`;
         } else {
             text = `Nein, ${content} hab ich nicht auf deiner Liste.`
