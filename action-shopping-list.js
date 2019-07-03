@@ -35,12 +35,42 @@ withHermes(async hermes => {
         </speak>`;
     });
 
+    dialog.flow(Intents.removeShoppingItem, async (msg, flow) => {
+        const item = msg.slots.find(slot => slot.slotName == 'item');
+        const content = item.rawValue;
+
+        const items = (await todoist.getActiveItemsREST()).map(item => item.content);
+
+        let text;
+        if (items.includes(content)) {
+            const commands = [{
+                type: Todoist.Commands.item_delete,
+                uuid:  uuidv4(),
+                args: {
+                    id: items.find(item => item.content === content).id
+                }
+            }];
+
+            await todoist.write(commands);
+            todoist.lastItemId = null;
+            todoist.lastItemContent = null;
+
+            text = `Ich habe <emphasis level="moderate">${content}</emphasis> von deiner Liste gelöscht.`
+        } else {
+            text = `${content} habe ich nicht auf deiner Liste`;
+        }
+        flow.end();
+
+        return `<speak>
+            <s>${text}</s>
+        </speak>`;
+    });
+
     dialog.flow(Intents.existsShoppingItem, async (msg, flow)  => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
         const content = item.rawValue;
-        const confidence = item.confidenceScore;
 
-        const items = await todoist.getActiveItemsREST();
+        const items = (await todoist.getActiveItemsREST()).map(item => item.content);
         flow.end();
 
         let text;
@@ -58,7 +88,7 @@ withHermes(async hermes => {
     });
 
     dialog.flow(Intents.getShoppingItems, async (msg, flow) => {
-        const items = await todoist.getActiveItemsREST();
+        const items = (await todoist.getActiveItemsREST()).map(item => item.content);
         flow.end();
 
         if (items.length === 0) {
