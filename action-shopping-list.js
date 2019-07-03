@@ -35,6 +35,22 @@ withHermes(async hermes => {
         </speak>`;
     });
 
+    dialog.flow(Intents.getShoppingItems, async (msg, flow) => {
+        const items = await todoist.getActiveItemsREST();
+        flow.end();
+
+        if (items.length === 0) {
+            return  `<speak><s>Deine Einkaufsliste ist <prosody rate="x-slow">leer</prosody>.</s>`
+        }  else {
+            const last = items.splice(-1)[0];
+            const text = `${items.join(', <break time=\"400ms\"/>')} <break time=\"350ms\"/> und ${last}`;
+            return `<speak>
+                <s>Also, <break time=\"600ms\"/> auf deiner Einkaufsliste sind:</s>
+                <s>${text}</s>
+            </speak>`;
+        }
+    });
+
     dialog.flow(Intents.removeLastShoppingItem, async (msg, flow) =>  {
         if (!todoist.lastItemId) {
             flow.end();

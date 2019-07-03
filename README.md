@@ -30,6 +30,8 @@ sudo npm install npm@latest -g
     - [ ] Check for exact match
     - [ ] Use stemming to handle fuzzyness
 - [ ] `getShoppingItems`: Handle Intent to read out the shopping list
+        - [ ] Use REST API initially
+        - [ ] Use Sync API to keep track of list locally
 - [ ] `removeShoppingItem`: Handle Intent to remove any existing Shopping Item
     - [ ] Remove exact match
     - [ ] Use stemming to handle fuzzyness
