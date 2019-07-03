@@ -19,7 +19,7 @@ sudo npm install npm@latest -g
 - [ ] Documentation with infrastructure explained
 - [x] Installable via Github repo
 - [x] Setup testing infrastructure
-- [-] `addShoppingItem`: Handle Intent for adding a Shopping Item
+- [ ] `addShoppingItem`: Handle Intent for adding a Shopping Item
     - [x] Naivly add Item to Todoist List
     - [ ] Respectfully refuse to add `unknownword` to list or low confidence
     - [ ] Politely decline if Item is already on list (`existsShoppingItem`-logic)
