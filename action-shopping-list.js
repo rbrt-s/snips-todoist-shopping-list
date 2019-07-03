@@ -39,15 +39,16 @@ withHermes(async hermes => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
         const content = item.rawValue;
 
-        const items = (await todoist.getActiveItemsREST()).map(item => item.content);
+        const items = await todoist.getActiveItemsREST();
+        const itemMatch = items.find(item => item.content === content);
 
         let text;
-        if (items.includes(content)) {
+        if (itemMatch) {
             const commands = [{
                 type: Todoist.Commands.item_delete,
                 uuid:  uuidv4(),
                 args: {
-                    id: items.find(item => item.content === content).id
+                    id: itemMatch.id
                 }
             }];
 
