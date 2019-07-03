@@ -50,8 +50,7 @@ withHermes(async hermes => {
                 text = `<s>Also, <break time=\"600ms\"/> auf deiner Einkaufsliste sind:</s>
                     <s>${items.join(', <break time=\"400ms\"/>')} <break time=\"350ms\"/> und ${last}.</s>`;
             }
-            
-            const 
+
             return `<speak>${text}</speak>`;
         }
     });
