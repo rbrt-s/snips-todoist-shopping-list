@@ -40,7 +40,7 @@ withHermes(async hermes => {
         flow.end();
 
         if (items.length === 0) {
-            return  `<speak><s>Deine Einkaufsliste ist <prosody pitch="x-low">leer</prosody>.</s>`
+            return  `<speak><s>Da ist nix drauf.</s></speak>`;
         }  else {
             let text;
             if (items.length === 1) {
