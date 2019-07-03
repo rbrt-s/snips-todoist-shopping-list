@@ -42,12 +42,17 @@ withHermes(async hermes => {
         if (items.length === 0) {
             return  `<speak><s>Deine Einkaufsliste ist <prosody rate="x-slow">leer</prosody>.</s>`
         }  else {
-            const last = items.splice(-1)[0];
-            const text = `${items.join(', <break time=\"400ms\"/>')} <break time=\"350ms\"/> und ${last}`;
-            return `<speak>
-                <s>Also, <break time=\"600ms\"/> auf deiner Einkaufsliste sind:</s>
-                <s>${text}</s>
-            </speak>`;
+            let text;
+            if (items.length === 1) {
+                text = `<s>Es sind nur ${items[0]} auf deiner Einkaufsliste.</s>`;
+            } else  {
+                const last = items.splice(-1)[0];
+                text = `<s>Also, <break time=\"600ms\"/> auf deiner Einkaufsliste sind:</s>
+                    <s>${items.join(', <break time=\"400ms\"/>')} <break time=\"350ms\"/> und ${last}.</s>`;
+            }
+            
+            const 
+            return `<speak>${text}</speak>`;
         }
     });
 
