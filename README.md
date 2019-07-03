@@ -27,13 +27,13 @@ sudo npm install npm@latest -g
         - [ ] Give option to add nonetheless
 - [x] `removeLastShoppingItem`: Handle Intent to remove the previously added Shopping Item
 - [ ] `existsShoppingItem`: Handle Intent to checking for existing Shopping Item
-    - [ ] Check for exact match
+    - [x] Check for exact match/ignorecase
     - [ ] Use stemming to handle fuzzyness
 - [ ] `getShoppingItems`: Handle Intent to read out the shopping list
         - [x] Use REST API initially
         - [ ] Use Sync API to keep track of list locally
 - [ ] `removeShoppingItem`: Handle Intent to remove any existing Shopping Item
-    - [ ] Remove exact match
+    - [x] Remove exact match/ignorecase
     - [ ] Use stemming to handle fuzzyness
 - [ ] Self-learning vocabulary-injection
     - [ ] Sync-Job starting from the date of installation

@@ -71,7 +71,7 @@ withHermes(async hermes => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
         const content = item.rawValue;
 
-        const items = (await todoist.getActiveItemsREST()).map(item => item.content);
+        const items = await todoist.getActiveItemsREST();
         flow.end();
 
         let text;
