@@ -40,7 +40,7 @@ withHermes(async hermes => {
         const content = item.rawValue;
 
         const items = await todoist.getActiveItemsREST();
-        const itemMatch = items.find(item => item.content === content);
+        const itemMatch = items.find(item => item.content.toLocaleLowerCase('de-DE') === content.toLocaleLowerCase('de-DE'));
 
         let text;
         if (itemMatch) {
@@ -77,7 +77,7 @@ withHermes(async hermes => {
         let text;
         if (items.length === 0) {
             text = `Deine Liste ist leer, was denkst du?`;
-        } else if (items.includes(content)) {
+        } else if (items.find(item => item.content.toLocaleLowerCase('de-DE') === content.toLocaleLowerCase('de-DE'))) {
             text = `Ja, ${content} hab ich auf deiner Liste.`;
         } else {
             text = `Nein, ${content} hab ich nicht auf deiner Liste.`
