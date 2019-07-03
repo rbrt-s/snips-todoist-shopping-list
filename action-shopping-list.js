@@ -35,6 +35,26 @@ withHermes(async hermes => {
         </speak>`;
     });
 
+    dialog.flow(Intents.existsShoppingItem, async (msg, flow)  => {
+        const item = msg.slots.find(slot => slot.slotName == 'item');
+        const content = item.rawValue;
+        const confidence = item.confidenceScore;
+
+        const items = await todoist.getActiveItemsREST();
+        flow.end();
+
+        let text;
+        if (items.includes(content)) {
+            text = `Ja, ${content} sind auf der Liste.`;
+        } else {
+            text = `Nein, ${content} sind nicht auf der Liste.`
+        }
+
+        return `<speak>
+            <s>${text}</s>
+        </speak>`;
+    });
+
     dialog.flow(Intents.getShoppingItems, async (msg, flow) => {
         const items = await todoist.getActiveItemsREST();
         flow.end();
