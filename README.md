@@ -19,7 +19,7 @@ sudo npm install npm@latest -g
 - [ ] Documentation with infrastructure explained
 - [x] Installable via Github repo
 - [x] Setup testing infrastructure
-- [ ] `addShoppingItem`: Handle Intent for adding a Shopping Item
+- [-] `addShoppingItem`: Handle Intent for adding a Shopping Item
     - [x] Naivly add Item to Todoist List
     - [ ] Respectfully refuse to add `unknownword` to list or low confidence
     - [ ] Politely decline if Item is already on list (`existsShoppingItem`-logic)
@@ -29,8 +29,8 @@ sudo npm install npm@latest -g
 - [ ] `existsShoppingItem`: Handle Intent to checking for existing Shopping Item
     - [ ] Check for exact match
     - [ ] Use stemming to handle fuzzyness
-- [ ] `getShoppingItems`: Handle Intent to read out the shopping list
-        - [ ] Use REST API initially
+- [-] `getShoppingItems`: Handle Intent to read out the shopping list
+        - [x] Use REST API initially
         - [ ] Use Sync API to keep track of list locally
 - [ ] `removeShoppingItem`: Handle Intent to remove any existing Shopping Item
     - [ ] Remove exact match
