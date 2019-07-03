@@ -30,7 +30,7 @@ withHermes(async hermes => {
         flow.end();
         
         return `<speak>
-            <s>Ich habe <emphasis level=\"moderate\">${content}</emphasis> der Einkaufsliste hinzugefügt.</s>
+            <s>Ich habe <emphasis level="moderate">${content}</emphasis> der Einkaufsliste hinzugefügt.</s>
             <s>Der Erkennungswert war ${confidence}</s>
         </speak>`;
     });
@@ -40,15 +40,15 @@ withHermes(async hermes => {
         flow.end();
 
         if (items.length === 0) {
-            return  `<speak><s>Deine Einkaufsliste ist <prosody rate="x-slow">leer</prosody>.</s>`
+            return  `<speak><s>Deine Einkaufsliste ist <prosody rate="30%">leer</prosody>.</s>`
         }  else {
             let text;
             if (items.length === 1) {
                 text = `<s>Es sind nur ${items[0]} auf deiner Einkaufsliste.</s>`;
             } else  {
                 const last = items.splice(-1)[0];
-                text = `<s>Also, <break time=\"600ms\"/> auf deiner Einkaufsliste sind:</s>
-                    <s>${items.join(', <break time=\"400ms\"/>')} <break time=\"350ms\"/> und ${last}.</s>`;
+                text = `<s>Also, <break time="600ms"/> auf deiner Einkaufsliste sind:</s>
+                    <s>${items.join(', <break time="400ms"/>')} <break time="350ms"/> und ${last}.</s>`;
             }
 
             return `<speak>${text}</speak>`;
@@ -78,7 +78,7 @@ withHermes(async hermes => {
             flow.end();
             
             return `<speak>
-                <s>Ich habe <emphasis level=\"moderate\">${content}</emphasis> wieder gelöscht.</s>
+                <s>Ich habe <emphasis level="moderate">${content}</emphasis> wieder gelöscht.</s>
             </speak>`;
         }
     });
