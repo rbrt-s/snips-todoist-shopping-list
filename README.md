@@ -32,7 +32,8 @@ sudo npm install npm@latest -g
     - [ ] Use stemming to handle fuzzyness
 - [ ] `getShoppingItems`: Handle Intent to read out the shopping list
     - [x] Use REST API initially
-    - [ ] Offer to add something in the end
+    - [x] Offer to add in loop in the end
+    - [ ] Check for existing items before adding in loop
     - [ ] Use Sync API to keep track of list locally
 - [ ] `removeShoppingItem`: Handle Intent to remove any existing Shopping Item
     - [x] Remove exact match/ignorecase
