@@ -79,14 +79,14 @@ withHermes(async hermes => {
             return `<speak>
                 <s>Deine Liste ist leer, was denkst du?</s>
             </speak>`;
-        } else if (!itemMatch) {
+        } else if (itemMatch) {
             flow.end();
             return `<speak>
                 <s>Ja, ${content} hab ich auf deiner Liste.</s>
             </speak>`;
         }
         
-        // we have a match, ask to add
+        // we have no match, ask to add
         flow.continue(Intents.ConfirmYes, async (msg, confirmationFlow) => {
             const tempId = uuidv4();
             const commands = [{
