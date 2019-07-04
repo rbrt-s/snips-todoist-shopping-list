@@ -8,7 +8,7 @@ withHermes(async hermes => {
     const todoist = await Todoist.factory();
     const dialog = hermes.dialog()
 
-    dialog.flow(Intents.addShoppingItem, async (msg, flow) => {
+    dialog.flow(Intents.AddItem, async (msg, flow) => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
         const content = item.rawValue;
         const confidence = item.confidenceScore;
@@ -35,7 +35,7 @@ withHermes(async hermes => {
         </speak>`;
     });
 
-    dialog.flow(Intents.removeShoppingItem, async (msg, flow) => {
+    dialog.flow(Intents.RemoveItem, async (msg, flow) => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
         const content = item.rawValue;
 
@@ -67,7 +67,7 @@ withHermes(async hermes => {
         </speak>`;
     });
 
-    dialog.flow(Intents.existsShoppingItem, async (msg, flow)  => {
+    dialog.flow(Intents.ExistsItem, async (msg, flow)  => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
         const content = item.rawValue;
 
@@ -88,7 +88,7 @@ withHermes(async hermes => {
         </speak>`;
     });
 
-    dialog.flow(Intents.getShoppingItems, async (msg, flow) => {
+    dialog.flow(Intents.GetItems, async (msg, flow) => {
         const items = (await todoist.getActiveItemsREST()).map(item => item.content);
         flow.end();
 
@@ -108,7 +108,7 @@ withHermes(async hermes => {
         }
     });
 
-    dialog.flow(Intents.removeLastShoppingItem, async (msg, flow) =>  {
+    dialog.flow(Intents.RemoveLastItem, async (msg, flow) =>  {
         if (!todoist.lastItemId) {
             flow.end();
             return `<speak>
