@@ -110,6 +110,10 @@ withHermes(async hermes => {
             </speak>`;
         });
 
+        flow.continue(Intents.ConfirmNo, (message, confirmationFlow) => {
+            flow.end();
+        });
+
         flow.notRecognized((message, notRecognizedFlow) => {
             flow.end();
         });
