@@ -10,7 +10,7 @@ withHermes(async hermes => {
 
     dialog.flow(Intents.AddItem, async (msg, flow) => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
-        const content = item.rawValue;
+        const content = item.value.value;
         const confidence = item.confidenceScore;
         const tempId = uuidv4();
         const commands = [{
@@ -36,7 +36,7 @@ withHermes(async hermes => {
 
     dialog.flow(Intents.RemoveItem, async (msg, flow) => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
-        const content = item.rawValue;
+        const content = item.value.value;
 
         const items = await todoist.getActiveItemsREST();
         const itemMatch = items.find(item => item.content.toLocaleLowerCase('de-DE') === content.toLocaleLowerCase('de-DE'));
@@ -68,7 +68,7 @@ withHermes(async hermes => {
 
     dialog.flow(Intents.ExistsItem, async (msg, flow)  => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
-        const content = item.rawValue;
+        const content = item.value.value;
 
         const items = await todoist.getActiveItemsREST();
 
@@ -124,7 +124,7 @@ withHermes(async hermes => {
 
     const loopAdd = async (msg, flow) => {
         const item = msg.slots.find(slot => slot.slotName == 'item');
-        const content = item.rawValue;
+        const content = item.value.value;
         const tempId = uuidv4();
         const commands = [{
             type: Todoist.Commands.item_add,
