@@ -72,19 +72,50 @@ withHermes(async hermes => {
         const content = item.rawValue;
 
         const items = await todoist.getActiveItemsREST();
-        flow.end();
 
-        let text;
+        const itemMatch = items.find(item => item.content.toLocaleLowerCase('de-DE') === content.toLocaleLowerCase('de-DE'))
         if (items.length === 0) {
-            text = `Deine Liste ist leer, was denkst du?`;
-        } else if (items.find(item => item.content.toLocaleLowerCase('de-DE') === content.toLocaleLowerCase('de-DE'))) {
-            text = `Ja, ${content} hab ich auf deiner Liste.`;
-        } else {
-            text = `Nein, ${content} hab ich nicht auf deiner Liste.`
+            flow.end();
+            return `<speak>
+                <s>Deine Liste ist leer, was denkst du?</s>
+            </speak>`;
+        } else if (!itemMatch) {
+            flow.end();
+            return `<speak>
+                <s>Ja, ${content} hab ich auf deiner Liste.</s>
+            </speak>`;
         }
+        
+        // we have a match, ask to add
+        flow.continue(Intents.ConfirmYes, async (msg, confirmationFlow) => {
+            const tempId = uuidv4();
+            const commands = [{
+                type: Todoist.Commands.item_add,
+                uuid:  uuidv4(),
+                temp_id: tempId,
+                args: {
+                    content: content,
+                    project_id: todoist.projectId
+                }
+            }];
+    
+            const result = await todoist.write(commands);
+            todoist.lastItemId = result.temp_id_mapping[tempId];
+            todoist.lastItemContent = content;
+    
+            flow.end();
+
+            return `<speak>
+                <s>Erledigt.</s>
+            </speak>`;
+        });
+
+        flow.notRecognized((message, notRecognizedFlow) => {
+            flow.end();
+        });
 
         return `<speak>
-            <s>${text}</s>
+            <s>Nein, ${content} hab ich noch nicht auf deiner Liste. Jetzt hinzufügen?</s>
         </speak>`;
     });
 
