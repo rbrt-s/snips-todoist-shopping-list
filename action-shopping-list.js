@@ -151,7 +151,7 @@ withHermes(async hermes => {
         });
 
         return `<speak>
-            <s>Erledigt. Noch etwas?</s>
+            <s>${content} hinzugefügt. Noch etwas?</s>
         </speak>`;
     };
 
