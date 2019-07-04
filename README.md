@@ -28,7 +28,7 @@ sudo npm install npm@latest -g
 - [x] `removeLastShoppingItem`: Handle Intent to remove the previously added Shopping Item
 - [ ] `existsShoppingItem`: Handle Intent to checking for existing Shopping Item
     - [x] Check for exact match/ignorecase
-    - [ ] If not found, offer to add it.
+    - [x] If not found, offer to add it.
     - [ ] Use stemming to handle fuzzyness
 - [ ] `getShoppingItems`: Handle Intent to read out the shopping list
     - [x] Use REST API initially

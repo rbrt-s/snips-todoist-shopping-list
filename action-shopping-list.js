@@ -31,7 +31,6 @@ withHermes(async hermes => {
         
         return `<speak>
             <s>Ich habe <emphasis level="moderate">${content}</emphasis> der Einkaufsliste hinzugefügt.</s>
-            <s>Der Erkennungswert war ${confidence}</s>
         </speak>`;
     });
 
@@ -123,12 +122,54 @@ withHermes(async hermes => {
         </speak>`;
     });
 
+    const loopAdd = async (msg, flow) => {
+        const item = msg.slots.find(slot => slot.slotName == 'item');
+        const content = item.rawValue;
+        const tempId = uuidv4();
+        const commands = [{
+            type: Todoist.Commands.item_add,
+            uuid:  uuidv4(),
+            temp_id: tempId,
+            args: {
+                content: content,
+                project_id: todoist.projectId
+            }
+        }];
+
+        const result = await todoist.write(commands);
+        todoist.lastItemId = result.temp_id_mapping[tempId];
+        todoist.lastItemContent = content;
+
+        flow.notRecognized((message, notRecognizedFlow) => {
+            flow.end();
+        });
+
+        flow.continue(Intents.ConfirmItem, loopAdd);
+
+        flow.continue(Intents.ConfirmNo, async (msg, noFlow) => {
+            noFlow.end();
+        });
+
+        return `<speak>
+            <s>Erledigt. Noch etwas?</s>
+        </speak>`;
+    };
+
     dialog.flow(Intents.GetItems, async (msg, flow) => {
         const items = (await todoist.getActiveItemsREST()).map(item => item.content);
-        flow.end();
+
+        flow.notRecognized((message, notRecognizedFlow) => {
+            flow.end();
+        });
+
+        flow.continue(Intents.ConfirmItem, loopAdd);
+
+        flow.continue(Intents.ConfirmNo, async (msg, noFlow) => {
+            noFlow.end();
+        });
 
         if (items.length === 0) {
-            return  `<speak><s>Da ist nix drauf.</s></speak>`;
+            return  `<speak><s>Da ist nix drauf.</s><s>Soll ich etwas hinzufügen?</s></speak>`;
         }  else {
             let text;
             if (items.length === 1) {
@@ -139,7 +180,10 @@ withHermes(async hermes => {
                     <s>${items.join(', <break time="400ms"/>')} <break time="350ms"/> und ${last}.</s>`;
             }
 
-            return `<speak>${text}</speak>`;
+            return `<speak>
+                ${text}
+                <s>Soll ich noch etwas hinzufügen?</s>
+            </speak>`;
         }
     });
 
